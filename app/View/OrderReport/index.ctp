@@ -32,7 +32,7 @@
 									<?php foreach($order_reports as $k => $order_report):?>
 										<tr class="item_tr" style="background-color:#fff;">
 											<td><span class="row-details row-details-close"></span></td>
-											<td colspan="2"><?php echo $k?></td>
+											<td colspan="2">Order <?php echo $k+1?></td>
 										</tr>
 										<tr class="hide">
 											<td></td>
