@@ -21,7 +21,7 @@ Question: Advanced Input Field</div>
 <button class="close" data-dismiss="alert"></button>
 The table you start with</div>
 
-<table class="table table-striped table-bordered table-hover">
+<table id="mytable" class="table table-striped table-bordered table-hover">
 <thead>
 <th><span id="add_item_button" class="btn mini green addbutton" onclick="addToObj=false">
 											<i class="icon-plus"></i></span></th>
@@ -67,7 +67,12 @@ $(document).ready(function(){
 	$("#add_item_button").click(function(){
 
 
-		alert("suppose to add a new row");
+		//alert("suppose to add a new row");
+		var myTable = document.getElementById("mytable");
+		var currentIndex = myTable.tBodies[0].rows.length;
+		currentIndex++;
+		var markup = "<tr><td></td><td><textarea name='data["+currentIndex+"][description]' class='m-wrap  description required' rows='2' ></textarea></td><td><input name='data["+currentIndex+"][quantity]' class=''></td><td><input name='data["+currentIndex+"][unit_price]'  class=''></td></tr>";
+        $("table tbody").append(markup);
 		
 
 		});

@@ -23,6 +23,7 @@
 <?php echo $this->Form->input('type', array('legend'=>false, 'type' => 'radio', 'options'=>$options_new,'before'=>'<label class="radio line notcheck">','after'=>'</label>' ,'separator'=>'</label><label class="radio line notcheck">'));?>
 
 
+
 <?php echo $this->Form->end();?>
 
 </div>
@@ -59,7 +60,26 @@ $(document).ready(function(){
 	});
 
 	
-	$(".showDialog").click(function(){ var id = $(this).data('id'); $("#"+id).dialog('open'); });
+	// $(".showDialog").click(function(){ 
+	// 	var id = $(this).data('id'); 
+	// 	$("#"+id).dialog('open'); 
+	// });
+	// document.getElementByClassName("showDialog").addEventListener("mouseover", mouseOver);
+	// function mouseOver() {
+	// 	var id = $(this).data('id');
+	// 	$("#"+id).dialog('open');
+	// }
+	$(".showDialog").mouseover(function(){
+		var id = $(this).data('id'); 
+		$("#"+id).dialog('open');
+	});
+
+	$(".showDialog").mouseout(function(){
+		var id = $(this).data('id'); 
+		$("#"+id).dialog('close');
+	});
+
+	
 
 })
 

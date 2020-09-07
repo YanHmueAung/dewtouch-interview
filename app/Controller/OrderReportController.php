@@ -11,6 +11,43 @@
 
 			$this->loadModel('Portion');
 			$portions = $this->Portion->find('all',array('conditions'=>array('Portion.valid'=>1),'recursive'=>2));
+
+
+
+
+			$showOrder = array();
+			foreach($orders as $index => $order) {
+				$count = $index;
+				$ingredients = array();
+				foreach($order['OrderDetail'] as $detail) {
+					foreach($portions as $portion) {
+						foreach($portion['PortionDetail'] as $pdetail) {
+							if ($detail['item_id'] == $pdetail['Portion']['item_id']) {
+								$qty = $pdetail['value'] * $detail['quantity'];
+								if (count($ingredients) > 0) {
+									foreach($ingredients as $key => $ingredient) {
+										if ($key == $pdetail['Part']['name']) {
+											$qty += $ingredient;
+											$ingredients[$pdetail['Part']['name']] = $qty;
+										} else {
+											$ingredients[$pdetail['Part']['name']] = $qty;
+										}
+									}
+								} else {
+									$ingredients[$pdetail['Part']['name']] = $qty;
+								}
+							}
+						}
+					}
+				}
+				$showOrder['Order '+$count] = $ingredients;
+			}
+
+
+
+
+
+
 			// debug($portions);exit;
 
 
@@ -35,7 +72,7 @@
 
 			// ...
 
-			$this->set('order_reports',$order_reports);
+			$this->set('order_reports',$showOrder);
 
 			$this->set('title',__('Orders Report'));
 		}
